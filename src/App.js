@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
+  const addTodo=(e)=>{
+    e.preventDefault() // prevent refresh from page 
+   // console.log(`this is the value ${input}`);
+    setTodos([...todos,input]);
+    setInput('');
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Welcome</h1>
+      {/* go ahead and take the value and reference it  */}
+      {/* putting it in the form will make use of the enter key */}
+      <form action="">
+      <input type="text" className='' value={input} onChange={(e)=>setInput(e.target.value) }/>  
+      <button type="submit" onClick={addTodo}>Add todo</button>
+      </form> 
+      <hr/>
+      <h2>List of Todos</h2>
+      <ul>
+      {
+        todos.map((todo,i)=>
+        <li key={i}>{todo}</li>
+        )
+      }
+      </ul>
     </div>
   );
 }
